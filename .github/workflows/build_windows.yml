@@ -40,7 +40,7 @@ jobs:
         name: Windows-Exe
         path: ${{ github.workspace }}\passcore_output\
 
-        - name: Get tag name
+    - name: Get tag name
       if: startsWith(github.ref, 'refs/tags/')
       id: tag-name
       run: |
