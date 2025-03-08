@@ -9,6 +9,7 @@ import { PasswordStrengthBar } from './PasswordStrengthBar';
 import { ReCaptcha } from './ReCaptcha';
 import Typography from '@mui/material/Typography';
 import { parsePlainTextAndLinks } from '../Utils/HtmlStringUtils';
+import TextField from '@mui/material/TextField';
 
 const defaultState: IChangePasswordFormInitialModel = {
     CurrentPassword: '',
@@ -142,7 +143,7 @@ export const ChangePasswordForm: React.FunctionComponent<IChangePasswordFormProp
                 <PasswordGenerator value={fields.NewPassword} setValue={setGenerated} />
             ) : (
                 <>
-                    <TextValidator
+                    <TextField
                         inputProps={{
                             tabIndex: 3,
                         }}
@@ -156,10 +157,8 @@ export const ChangePasswordForm: React.FunctionComponent<IChangePasswordFormProp
                         name="NewPassword"
                         onChange={handleChange}
                         type="password"
-                        validators={['required']}
                         value={fields.NewPassword}
                         fullWidth
-                        errorMessages={[fieldRequired]}
                     />
                     {showPasswordMeter && <PasswordStrengthBar newPassword={fields.NewPassword} />}
                     <Typography
@@ -176,6 +175,7 @@ export const ChangePasswordForm: React.FunctionComponent<IChangePasswordFormProp
                             flex: 1,
                             margin: 'auto',
                         }}
+                        key={fields.NewPassword} // Add a key that changes with NewPassword to force re-render
                         label={newPasswordVerifyLabel}
                         variant="standard"
                         helperText={newPasswordVerifyHelpblock}
